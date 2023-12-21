@@ -1,0 +1,32 @@
+from src.utilities.gerencia_csv import Gerencia_csv
+
+'''    
+
+Arquivo dedicado as classes animal, raça e espécie
+
+'''
+
+class Animal:
+    def __init__(self, nome, raça, especie, data, sexo,peso):
+        self.nome = nome
+        self.raça = Raça(raça)
+        self.especie = especie
+        self.data_nascimento =  data
+        self.sexo = sexo
+        self.__historico_vacinas = []
+        # Adicionei o atributo peso, pois algumas doses de vacina dependem do peso do animal
+        self.peso = peso
+
+    #Gets e Sets
+    def getHitoricoVacinas(self):
+        return self.__historico_vacinas
+    def setHistoricoVacinas(self, novavacina):
+        self.__historico_vacinas.append(novavacina)
+        return self.__historico_vacinas
+
+class Raça:
+    def __init__(self, nome_raça):
+        self.nome_raça = nome_raça
+class Especie:
+    def __init__(self, nome_especie):
+        self.nome_especie = nome_especie
