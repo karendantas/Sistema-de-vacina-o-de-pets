@@ -4,7 +4,9 @@ import csv
 
 class Gerencia_csv:
     def __init__(self):
-        self.cabeçalho_animais = ['Nome', 'Sexo']
+        self.cabecalho_animais = ['Nome', 'Sexo','Data Nascimento','Histórico de Vacinas']
+        self.cabecalho_clientes = ['Nome Completo','Data de Nascimento','Telefone','CPF','Login','Senha','Email']
+        self.cabecalho_vacinas = ['Nome','Dosagem','Observações','Data de Vencimento','Quantidade']
         #fazer cabeçalhos csv
 
         pass

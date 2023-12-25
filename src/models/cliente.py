@@ -18,15 +18,16 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         super().Agendar_vacina(data, animal, cliente, Agenda, vacina)
         return True
     
-    def Aplicar_vacina(self,vacina, animal):
+    def Aplicar_vacina(self,vacina, animal,aplicador,aplicacao_vacina):
         '''
         Simula a hora que o cliente leva o animal para receber a vacina, adicionando ao 
         histórico do animal a vacina recebida.
 
         Args:
-        vacina: (Object) Uma instancia da vacina a ser utilizada
-        animal: (Object) Uma instancia de animal
-
+        vacina: (Object) Uma instancia da Vacina a ser utilizada
+        animal: (Object) Uma instancia de Animal
+        aplicador: (Object) Uma instancia de Aplicador
+        aplicacao_vacina: (Object) Uma instancia de Aplicacao_Vacina
         '''
         
-        animal.set_HistoricoVacinas(vacina)
+        super().Aplicar_vacina(animal,vacina,aplicador,aplicacao_vacina)

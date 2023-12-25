@@ -7,15 +7,13 @@ Arquivo dedicado as classes animal, raça e espécie
 '''
 
 class Animal:
-    def __init__(self, nome, raça, especie, data, sexo,peso):
+    def __init__(self, nome, raça, especie, data, sexo):
         self.nome = nome
         self.raça = Raça(raça)
         self.especie = especie
         self.data_nascimento =  data
         self.sexo = sexo
         self.__historico_vacinas = []
-        # Adicionei o atributo peso, pois algumas doses de vacina dependem do peso do animal
-        self.peso = peso
 
     #Gets e Sets
     def getHitoricoVacinas(self):

@@ -1,3 +1,4 @@
+from datetime import datetime
 from abc import ABC, abstractmethod
 from src.utilities.gerencia_csv import Gerencia_csv
 '''
@@ -59,8 +60,13 @@ class Usuario(ABC, Gerencia_csv):
         Agenda.set_agendamentos(agendamento)
     
     @abstractmethod
-    def Aplicar_vacina(self):
-        pass
+    def Aplicar_vacina(self,animal,vacina,aplicador,aplicacao_vacina):
+        if aplicador is None:
+            print("Não foi possível efetuar a vacinação")
+        else:
+            aplicacao_vacina.data_aplicacao = datetime.today()
+            animal.setHistoricoVacinas("Vacina: {}\nAplicador: {}\nData aplicação Vacina: {}".format(vacina.nome,
+            aplicador.nome_completo,aplicacao_vacina.data_aplicacao))
 
 class Pessoa:
     def __init__(self, nome_completo, data, telefone, cpf):
