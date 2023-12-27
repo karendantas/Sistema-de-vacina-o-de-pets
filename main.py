@@ -19,6 +19,8 @@
 
 # #O PROBLEMA ERAM OS ESPACINHOS
 # cli.autentica()
+# g.inicia_arquivo('src\Database\Banco_Datas.csv')
+
 
 
 

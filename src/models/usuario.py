@@ -52,13 +52,13 @@ class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
         animal = Animal(nome, raça, especie, data_nascimento, sexo)
 
         dados = [[nome, raça, data_nascimento]]
-        super().escrever_arquivo("ArquivosCSV\Banco_Animais.csv", dados)
+        Gerencia_csv().escrever_arquivo("ArquivosCSV\Banco_Animais.csv", dados)
 
         return animal
     
-    # Lucas
     @abstractmethod
     def Agendar_vacina(self, data, Animal, Cliente, Agenda, Vacina):
+        #lembrando que antes precisa mostrar para o cliente as datas disponiveis
         
         '''Esse metodo irá receber os args e irá alocar em um dict. 
            Esse dict irá ser alocado na classe Agenda por meio do metódo set_agendamentos
@@ -70,9 +70,13 @@ class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
             agenda: (object) uma instancia da classe Agenda
             vacina: (object) uma instancia da classe Vacina
         '''
-        agendamento = {}
-        agendamento = {"Cliente: ": Cliente,"Animal: ":Animal,"Data: ":data,"Vacina: ":Vacina}
-        Agenda.set_agendamentos(agendamento)
+        #conferindo se a data digitada está disponível
+        if Gerencia_csv.verificar_datas(data):
+            agendamento = {}
+            agendamento = {"Cliente: ": Cliente,"Animal: ":Animal,"Data: ":data,"Vacina: ":Vacina}
+            Agenda.set_agendamentos(agendamento)
+        else:
+            print("Desculpe, a data informada não é válida.")
     
     @abstractmethod
     def Aplicar_vacina(self,animal,vacina,aplicador,aplicacao_vacina):
@@ -82,6 +86,8 @@ class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
             aplicacao_vacina.data_aplicacao = datetime.today()
             animal.setHistoricoVacinas("Vacina: {}\nAplicador: {}\nData aplicação Vacina: {}".format(vacina.nome,
             aplicador.nome_completo,aplicacao_vacina.data_aplicacao))
+            #chamar funcao que remove uma vacina
+            # Gerencia_csv.remove_vacinas(vacina.nome)
 
 class Pessoa:
     def __init__(self, nome_completo, data, telefone, cpf):

@@ -15,10 +15,9 @@ class Funcionário(Pessoa):
         return self.__salario
     
     
-    # Lucas
+
     def Agendar_vacina(self, cliente, animal,data,agenda,vacina):
         cliente.Agendar_vacina(data, animal, cliente, agenda, vacina)    
-    #
     
     
     def Cadastrar_pet(self, cliente, animal):
@@ -28,7 +27,7 @@ class Funcionário(Pessoa):
     def Aplicar_vacina(self):
         pass
 
-# Lucas
+
 class Aplicador(Funcionário,Pessoa):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf,formacao):
         Pessoa.__init__(self, nome_completo, data_nascimento, telefone, cpf)

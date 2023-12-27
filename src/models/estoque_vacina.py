@@ -43,7 +43,7 @@ class Agenda:
     
     def vacinas_disponiveis(self):
         '''
-            Le um arquivo csv que contem strings das vacinas e suas respectivas quantidades
+        Le um arquivo csv que contem strings das vacinas e suas respectivas quantidades
 
         '''
         print("Vacinas disponíveis no momento: ")
@@ -57,8 +57,8 @@ class EstoqueVacinas:
 
     def mostrar_vacinas(self):
         '''
-            Chama a função 'le_arquivo' criada em 'funcoesadicionais.py' para ler
-            os dados das vacinas armazenadas
+        Chama método 'ler_arquivo' da classe 'Gerencia_csv' e
+        le um arquivo csv contendo as vacinas disponíveis do sistema
 
         '''
         ler_arquivo("ArquivosCSV\Banco_Vacinas.csv")
@@ -75,5 +75,7 @@ class EstoqueVacinas:
         dados = [[nomevacina, quantidade]]
         escrever_arquivo("ArquivosCSV\Banco_Vacinas.csv", dados)
     
+
+    #terminar esse (to quase, codigo ta la no gerencia_csv)
     def remove_vacina(self, vacina):
         '''funcionario precisa de permissao pra fazer isso'''
