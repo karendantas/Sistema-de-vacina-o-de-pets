@@ -1,14 +1,27 @@
 from datetime import datetime
 from abc import ABC, abstractmethod
+from src.models.animal import Animal
 from src.utilities.gerencia_csv import Gerencia_csv
 '''
     Arquivo dedicado ao gerenciamento das super classes(Usuario, Pessoa)
  
 '''
-
+class AutenticavelMixIn(Gerencia_csv):
+   
+    def autentica(self):
+        '''
+        Pede o login e a senha de um usuário, as informações serão verificadas em um método
+        da classe 'Gerencia_csv' que retorna um Boolen para confirmar a verificação
+    
+        '''
+        login = input("Informe o seu login: ")
+        senha = input("Informe sua senha: ")
+        super().autentica_usuario('src\Database\Banco_Cliente.csv', login, senha)
+        
+      
 
 #Interface Usuário
-class Usuario(ABC, Gerencia_csv):
+class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
     def __init__(self, login, email, senha ):
         self.__login = login
         self.__senha = senha
@@ -26,9 +39,10 @@ class Usuario(ABC, Gerencia_csv):
         self.__senha = novasenha
         return self.__senha 
 
-    def Cadastrar_pet(self, Animal):
+    def Cadastrar_pet(self):
         '''Usuário informa dados sobre o animal, instanciando um objeto do tipo animal
           e a função retorna a instancia'''
+        
         nome = input("Informe o nome do animal: ")
         raça = input("Informe a raça do animal: ")
         especie = input("Informe a espécie do animal: ")
@@ -44,17 +58,18 @@ class Usuario(ABC, Gerencia_csv):
     
     # Lucas
     @abstractmethod
-    def Agendar_vacina(self,data,Animal,Cliente,Agenda,Vacina):
-        '''Esse metodo irá receber os args e irá alocar em um dict. Esse dict irá ser alocado na classe Agenda por meio do metódo set_agendamentos'''
+    def Agendar_vacina(self, data, Animal, Cliente, Agenda, Vacina):
+        
+        '''Esse metodo irá receber os args e irá alocar em um dict. 
+           Esse dict irá ser alocado na classe Agenda por meio do metódo set_agendamentos
 
-        '''
-        Args:
+            Args:
             data: uma string no formato datetime
             animal: (object) uma instancia da classe Animal
             cliente: (object) uma instancia da classe Cliente
             agenda: (object) uma instancia da classe Agenda
             vacina: (object) uma instancia da classe Vacina
-            '''
+        '''
         agendamento = {}
         agendamento = {"Cliente: ": Cliente,"Animal: ":Animal,"Data: ":data,"Vacina: ":Vacina}
         Agenda.set_agendamentos(agendamento)
@@ -81,13 +96,3 @@ class Pessoa:
     def setCpf(self, novocpf):
         self.__cpf = novocpf
         return self.__cpf
-
-class AutenticavelMixIn:
-    '''Pede login e senha do usuário, retornando True caso o login e senha estejam de acordo
-       com o cadastrado. Dessa forma, autenticando o usuário e permitindo certas ações dentro
-       do sistema '''
-    def autentica(self, usuario):
-        login = input("Informe o seu login: ")
-        senha = input("Informe sua senha: ")
-        if login == usuario.getLogin() and senha == usuario.getSenha():
-            return True

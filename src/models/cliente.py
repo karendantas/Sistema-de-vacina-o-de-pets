@@ -9,13 +9,34 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         self.animais = []
 
     def Cadastrar_pet(self):
-        '''Cria-se a instancia'''
-        animal = super().Cadastrar_pet()
+        '''
+            O método 'Cadastrar_pet' está na classe 'Usuario', por isso
+            está sendo chamada pela classe Pai. O retorno da classe gera um objeto de animal
+            que sera armazenado na variavel 'animal'
+
+            Depois que a variavel conter de certeza um objeto de animal, ele sera adiconado
+            a lista de animais do cliente
+        
+        '''
+        animal = Usuario().Cadastrar_pet()
         if isinstance(animal, Animal):
             self.animais.append(animal)
-        # Ajustei o metodo agendar vacina
+
+            
     def Agendar_vacina(self, data, animal, cliente, Agenda, vacina):
-        super().Agendar_vacina(data, animal, cliente, Agenda, vacina)
+        '''
+        Chama o método 'Agendar_vacina' da classe Pai que reliza a criação de um dicionário
+        e aloca dentro do atributo lista 'agendamentos' da Agenda que está em 'estoque_funcionarios'.
+
+        Args:
+        data: 
+        animal: (Object) Uma instancia de Animal
+        cliente: (Object) Instancia de Cliente
+        Agenda: (Object) Instancia de Agenda
+        vacina: (Object) Uma instancia da Vacina a ser utilizada
+
+        '''
+        Usuario().Agendar_vacina(data, animal, cliente, Agenda, vacina)
         return True
     
     def Aplicar_vacina(self,vacina, animal,aplicador,aplicacao_vacina):
@@ -30,4 +51,4 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         aplicacao_vacina: (Object) Uma instancia de Aplicacao_Vacina
         '''
         
-        super().Aplicar_vacina(animal,vacina,aplicador,aplicacao_vacina)
+        Usuario().Aplicar_vacina(animal,vacina,aplicador,aplicacao_vacina)

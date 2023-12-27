@@ -22,7 +22,6 @@ class Funcionário(Pessoa):
     
     
     def Cadastrar_pet(self, cliente, animal):
-    
         if isinstance(cliente,Cliente):
             cliente.Cadastrar_pet(animal)
 
