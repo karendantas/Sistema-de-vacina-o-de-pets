@@ -134,14 +134,6 @@ while opcao != 3:
                         cliente_obj1 = Cliente(nome_cli, data, telefone,cpf, login, senha, email)
                         funcionario_obj.escrever_arquivo('src/Database/Banco_Cliente.csv', dados_cliente)
                     case 2:
-                        nome_pet = input("Informe o nome do animal: ")
-                        data_pet = str(input("Informe a data de nascimento do animal:"))
-                        formato = "%d/%m/%Y"
-                        data_pet = datetime.strptime(data_pet, formato)
-                        data_pet = data_pet.date()
-                        raça_pet = input("Informe a raça do animal: ")
-                        sexo_pet = input("Informe o sexo do animal: ")
-                        especie_pet = input("Informe a especie do animal:")
                         nome_cli = input("Informe o nome do cliente: ")
 
                         cliente_obj1 = ''
@@ -152,8 +144,8 @@ while opcao != 3:
                                     if atributo[0] == nome_cli:
                                         cliente_obj1 = Cliente(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6])
 
-                        animal_obj1 = Animal(nome_pet, raça_pet, especie_pet, data_pet, sexo_pet)
-                        funcionario_obj.Cadastrar_pet(cliente_obj1, animal_obj1)
+                        animal_obj = ''
+                        animal_obj = Usuario.Cadastrar_pet(Usuario)
                     case 3:
                         Gerencia_csv.ler_arquivo('src\Database\Banco_Datas.csv')
 
