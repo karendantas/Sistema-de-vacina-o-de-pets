@@ -70,7 +70,7 @@ class Gerencia_csv:
         dados(list): Lista que contem outras listas de dados
             
         '''
-        self.inicia_arquivo(caminho) #verifica se arquivo existe
+        #self.inicia_arquivo(caminho) #verifica se arquivo existe
         with open(caminho, mode = 'a', newline='') as arquivopy:
             escritor_csv = csv.writer(arquivopy, delimiter=',')
             escritor_csv.writerows(dados)

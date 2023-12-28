@@ -30,16 +30,19 @@ while opcao != 3:
             opcao2 = int(input("Digite sua opção: "))
             match opcao2:
                 case 1:
-                    if (Usuario.autentica() == True):
+                    login = input("Informe seu login:")
+                    senha = input("Informe senha:")
+                    verificacao = Cliente.autentica_usuario(Cliente, 'src\Database\Banco_Cliente.csv', login, senha)
+                    if (verificacao == True):
                         #Caso cliente seja autenticado, cria-se um objeto a partir dos dados armazenados
                         cliente_obj = ''
-                        with open ("src/Database/Banco_Cliente.csv", mode ='r') as arq:
-                                leitor_csv = csv.reader(arq, delimter =',')
+                        with open ("src\Database\Banco_Cliente.csv", mode ='r') as arq:
+                                leitor_csv = csv.reader(arq, delimiter=',')
                                 next(leitor_csv)
                                 for atributo in leitor_csv:
                                     if atributo[4] == login:
                                         cliente_obj = Cliente(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6])
-
+                        opcao3 = 0
                         while opcao3 != 4:
                             print("1 - Cadastrar Pet")
                             print("2 - Agendar Vacina")
@@ -48,17 +51,9 @@ while opcao != 3:
                             opcao3 = int(input("Digite sua opção: "))
                             match opcao3:
                                 case 1:
-                                    nome_pet = input("Informe o nome do animal: ")
-                                    data_pet = str(input("Informe a data de nascimento do animal:"))
-                                    formato = "%d/%m/%Y"
-                                    data_pet = datetime.strptime(data, formato)
-                                    data_pet = data.date()
-                                    raça_pet = input("Informe a reaça do animal: ")
-                                    sexo_pet = input("Informe o sexo do animal: ")
-                                    especie_pet = input("Informe a especie do animal:")
-
-                                    animal_obj = Animal(nome, raça_pet, especie_pet, data_pet, sexo_pet)
-                                    cliente_obj.Cadastrar_pet(cliente_obj)
+                                    #os inputs estao dentro do metodo que o objeto chama, e ele retorna o animla
+                                    animal_obj = ''
+                                    animal_obj = Usuario.Cadastrar_pet(Usuario)
                                 case 2:
                                     data = str(input("Informe uma data: "))
                                     animal = str(input("Informe o nome do aninal: "))
@@ -84,12 +79,14 @@ while opcao != 3:
                     data = datetime.strptime(data, formato)
                     data = data.date()
                     telefone = str(input("Informe seu telefone:"))
+                    cpf = str(input("Informe seu cpf"))
                     login = str(input("Crie um login: "))
                     senha = str(input("Crie uma senha:"))
                     email =str(input("Informe seu email:"))
 
-                    cliente_objeto = Cliente(nome, data, telefone, login, senha, email)
-                    Gerencia_csv.escrever_arquivo("src/Database/Banco_Cliente.csv")
+                    cliente_objeto = Cliente(nome, data, telefone, cpf, login, senha, email)
+                    dados = [[nome, data, telefone, cpf, login, senha, email]]
+                    Gerencia_csv.escrever_arquivo(Gerencia_csv,"src\Database\Banco_Cliente.csv", dados)
 
                     
         case 2:
@@ -100,7 +97,7 @@ while opcao != 3:
             if (Usuario.autentica(login,senha) == True):
                 #Caso funcionario seja autenticado, cria-se um objeto a partir dos dados armazenados
                 funcionario_obj = ''
-                with open ("src/Database/Banco_Cliente.csv", mode ='r') as arq:
+                with open ("src\Database\Banco_Cliente.csv", mode ='r') as arq:
                         leitor_csv = csv.reader(arq, delimter =',')
                         next(leitor_csv)
                         for atributo in leitor_csv:

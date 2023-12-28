@@ -39,20 +39,23 @@ class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
         self.__senha = novasenha
         return self.__senha 
 
+    @abstractmethod
     def Cadastrar_pet(self):
         '''Usuário informa dados sobre o animal, instanciando um objeto do tipo animal
           e a função retorna a instancia'''
-        
-        nome = input("Informe o nome do animal: ")
-        raça = input("Informe a raça do animal: ")
-        especie = input("Informe a espécie do animal: ")
-        data_nascimento = input("Informe a data de nascimento: ")
-        sexo = input("Informe o sexo do animal: ")
+        nome_pet = input("Informe o nome do animal: ")
+        data_pet = str(input("Informe a data de nascimento do animal:"))
+        formato = "%d/%m/%Y"
+        data_pet = datetime.strptime(data_pet, formato)
+        data_pet = data_pet.date()
+        raça_pet = input("Informe a reaça do animal: ")
+        sexo_pet = input("Informe o sexo do animal: ")
+        especie_pet = input("Informe a especie do animal:")
 
-        animal = Animal(nome, raça, especie, data_nascimento, sexo)
+        animal = Animal(nome_pet, raça_pet, especie_pet, data_pet,sexo_pet )
 
-        dados = [[nome, raça, data_nascimento]]
-        Gerencia_csv().escrever_arquivo("ArquivosCSV\Banco_Animais.csv", dados)
+        dados = [[nome_pet, raça_pet, data_pet, especie_pet, data_pet, sexo_pet]]
+        Gerencia_csv().escrever_arquivo("src\Database\Banco_Animais.csv", dados)
 
         return animal
     

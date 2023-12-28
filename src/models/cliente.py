@@ -40,7 +40,7 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
 
         '''
 
-        if Gerencia_csv.verificar_datas(data):
+        if Gerencia_csv.verificar_datas(Gerencia_csv,data):
             Usuario().Agendar_vacina(data, animal, cliente, Agenda, vacina)
         else:
             print("Data informada inválida")
