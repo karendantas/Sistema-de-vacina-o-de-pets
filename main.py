@@ -94,15 +94,16 @@ while opcao != 3:
             #autenticando funcionario
             nome = input("Informe o nome: ")
             cargo = input("Informe o cargo: ")
-            if (Usuario.autentica(login,senha) == True):
+            verificacao = Funcionario.autentica_funcionario(Funcionario,"src\Database\Banco_Funcionarios.csv",login,senha)
+            if (verificacao == True):
                 #Caso funcionario seja autenticado, cria-se um objeto a partir dos dados armazenados
                 funcionario_obj = ''
-                with open ("src\Database\Banco_Cliente.csv", mode ='r') as arq:
-                        leitor_csv = csv.reader(arq, delimter =',')
+                with open ("src/Database/Banco_Funcionarios.csv", mode ='r') as arq:
+                        leitor_csv = csv.reader(arq, delimiter =',')
                         next(leitor_csv)
                         for atributo in leitor_csv:
-                            if atributo[4] == login:
-                                funcionario_obj = Funcionario(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6])
+                            if atributo[6] == login:
+                                funcionario_obj = Funcionario(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6], atributo[7], atributo[8])
 
             print("1- Cadastrar um novo cliente")
             print("2 - Cadastrar um animal")
@@ -118,30 +119,40 @@ while opcao != 3:
                 match (opcao4):
                     case 1:
                         #funcionario pega os dados do cliente e adiciona no banco de dados
-                        nome_cli = input("Nome do cliente")
+                        nome_cli = input("Nome do cliente: ")
                         data = str(input("Data do cliente: "))
                         formato = "%d/%m/%Y"
                         data = datetime.strptime(data, formato)
                         data = data.date()
                         telefone = str(input("Telefone do cliente"))
+                        cpf = str(input("CPF do cliente: "))
                         login = str(input("Login do cliente: "))
                         senha = str(input("Senha do cliente:"))
                         email =str(input("Email do cliente:"))
 
-                        dados_cliente = [[nome, data, telefone, login, senha, email]]
-                        cliente_obj1 = Cliente(nome, data, telefone, login, senha, email)
+                        dados_cliente = [[nome_cli, data, telefone,cpf, login, senha, email]]
+                        cliente_obj1 = Cliente(nome_cli, data, telefone,cpf, login, senha, email)
                         funcionario_obj.escrever_arquivo('src/Database/Banco_Cliente.csv', dados_cliente)
                     case 2:
                         nome_pet = input("Informe o nome do animal: ")
                         data_pet = str(input("Informe a data de nascimento do animal:"))
                         formato = "%d/%m/%Y"
-                        data_pet = datetime.strptime(data, formato)
-                        data_pet = data.date()
-                        raça_pet = input("Informe a reaça do animal: ")
+                        data_pet = datetime.strptime(data_pet, formato)
+                        data_pet = data_pet.date()
+                        raça_pet = input("Informe a raça do animal: ")
                         sexo_pet = input("Informe o sexo do animal: ")
                         especie_pet = input("Informe a especie do animal:")
+                        nome_cli = input("Informe o nome do cliente: ")
 
-                        animal_obj1 = Animal(nome, raça_pet, especie_pet, data_pet, sexo_pet)
+                        cliente_obj1 = ''
+                        with open ("src/Database/Banco_Cliente.csv", mode ='r') as arq:
+                                leitor_csv = csv.reader(arq, delimiter =',')
+                                next(leitor_csv)
+                                for atributo in leitor_csv:
+                                    if atributo[0] == nome_cli:
+                                        cliente_obj1 = Cliente(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6])
+
+                        animal_obj1 = Animal(nome_pet, raça_pet, especie_pet, data_pet, sexo_pet)
                         funcionario_obj.Cadastrar_pet(cliente_obj1, animal_obj1)
                     case 3:
                         funcionario_obj.ler_arquivo('src\Database\Banco_Datas.csv')

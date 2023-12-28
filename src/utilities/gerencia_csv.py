@@ -9,7 +9,7 @@ class Gerencia_csv:
         self.cabecalho_animais = ['Nome', 'Sexo','Data Nascimento','Histórico de Vacinas']
         self.cabecalho_clientes = ['Nome Completo','Data de Nascimento','Telefone','CPF','Login','Senha','Email']
         self.cabecalho_vacinas = ['Nome','Dosagem','Observacoes','Data de Vencimento','Quantidade']
-        self.cabecalho_funcionarios = ['Nome Completo', 'Data de Nascimento', 'Telefone', 'CPF']
+        self.cabecalho_funcionarios = ['Nome Completo', 'Data de Nascimento', 'Telefone', 'CPF','Salario', 'Cargo','Login','Senha','Email']
         self.cabecalho_datas = ['Data']
 
         #fazer cabeçalhos csv
@@ -155,6 +155,29 @@ class Gerencia_csv:
             next(leitor_csv)
             for linha in leitor_csv:
                 if str(linha[4]) == login and str(linha[5]) == senha:
+                    print("Autenticado!")
+                    return True
+                else:
+                    print("Senha ou login incorretos")
+
+    def autentica_funcionario(self, caminho, login, senha):
+        '''
+        Método que atua junto com método da classe Cliente, fazendo leitura e conferindo
+        informação das linhas
+
+        Args:
+        login(str): Login de um usuario
+        senha(str): Senha de um usuario
+
+        Returns:
+        Boolean: retorna True se a autenticação é um sucesso
+        
+        '''
+        with open (caminho, mode='r') as arquivopy:
+            leitor_csv = csv.reader(arquivopy, delimiter=',')
+            next(leitor_csv)
+            for linha in leitor_csv:
+                if str(linha[6]) == login and str(linha[7]) == senha:
                     print("Autenticado!")
                     return True
                 else:
