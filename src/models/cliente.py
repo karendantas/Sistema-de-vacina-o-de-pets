@@ -21,6 +21,8 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         animal = Usuario().Cadastrar_pet()
         if isinstance(animal, Animal):
             self.animais.append(animal)
+            dados = [self.animais]
+            Gerencia_csv.escrever_arquivo('src\Database\Banco_Animais.csv', dados)
 
             
     def Agendar_vacina(self, data, animal, cliente, Agenda, vacina):
@@ -36,8 +38,11 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         vacina: (Object) Uma instancia da Vacina a ser utilizada
 
         '''
-        Usuario().Agendar_vacina(data, animal, cliente, Agenda, vacina)
-        return True
+
+        if Gerencia_csv.verificar_datas(data):
+            Usuario().Agendar_vacina(data, animal, cliente, Agenda, vacina)
+        else:
+            print("Data informada inválida")
     
     def Aplicar_vacina(self,vacina, animal,aplicador,aplicacao_vacina):
         '''

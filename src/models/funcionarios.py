@@ -1,7 +1,7 @@
 from src.models.usuario import Pessoa
 from src.models.cliente import Cliente
 
-class Funcionário(Pessoa):
+class Funcionario(Pessoa):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf, salário, cargo):
         super().__init__(nome_completo, data_nascimento, telefone, cpf)
         self.__salario = salário
@@ -27,7 +27,7 @@ class Funcionário(Pessoa):
         pass
 
 
-class Aplicador(Funcionário,Pessoa):
+class Aplicador(Funcionario,Pessoa):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf,formacao):
         Pessoa.__init__(self, nome_completo, data_nascimento, telefone, cpf)
         self.formacao = formacao
