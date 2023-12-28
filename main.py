@@ -92,8 +92,8 @@ while opcao != 3:
         case 2:
             print("TELA DO FUNCIONÁRIO")
             #autenticando funcionario
-            login = input("Informe o login: ")
-            senha = input("Informe a senha: ")
+            nome = input("Informe o nome: ")
+            cargo = input("Informe o cargo: ")
             if (Usuario.autentica(login,senha) == True):
                 #Caso funcionario seja autenticado, cria-se um objeto a partir dos dados armazenados
                 funcionario_obj = ''
