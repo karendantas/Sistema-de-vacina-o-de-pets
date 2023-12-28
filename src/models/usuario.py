@@ -73,13 +73,11 @@ class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
             agenda: (object) uma instancia da classe Agenda
             vacina: (object) uma instancia da classe Vacina
         '''
-        #conferindo se a data digitada está disponível
-        if Gerencia_csv.verificar_datas(data):
-            agendamento = {}
-            agendamento = {"Cliente: ": Cliente,"Animal: ":Animal,"Data: ":data,"Vacina: ":Vacina}
-            Agenda.set_agendamentos(agendamento)
-        else:
-            print("Desculpe, a data informada não é válida.")
+   
+        agendamento = {}
+        agendamento = {"Cliente: ": Cliente,"Animal: ":Animal,"Data: ":data,"Vacina: ":Vacina}
+        Agenda.set_agendamentos(agendamento)
+      
     
     @abstractmethod
     def Aplicar_vacina(self,animal,vacina,aplicador,aplicacao_vacina):

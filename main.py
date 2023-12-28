@@ -92,9 +92,9 @@ while opcao != 3:
         case 2:
             print("TELA DO FUNCIONÁRIO")
             #autenticando funcionario
-            nome = input("Informe o nome: ")
-            cargo = input("Informe o cargo: ")
-            verificacao = Funcionario.autentica_funcionario(Funcionario,"src\Database\Banco_Funcionarios.csv",login,senha)
+            login = input("Informe o login: ")
+            senha = input("Informe a senha: ")
+            verificacao = Funcionario.autentica_funcionario(Funcionario,"src\Database\Banco_Funcionarios.csv",login, senha)
             if (verificacao == True):
                 #Caso funcionario seja autenticado, cria-se um objeto a partir dos dados armazenados
                 funcionario_obj = ''
@@ -102,7 +102,7 @@ while opcao != 3:
                         leitor_csv = csv.reader(arq, delimiter =',')
                         next(leitor_csv)
                         for atributo in leitor_csv:
-                            if atributo[6] == login:
+                            if atributo[7] == login:
                                 funcionario_obj = Funcionario(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6], atributo[7], atributo[8])
 
             print("1- Cadastrar um novo cliente")
@@ -155,9 +155,10 @@ while opcao != 3:
                         animal_obj1 = Animal(nome_pet, raça_pet, especie_pet, data_pet, sexo_pet)
                         funcionario_obj.Cadastrar_pet(cliente_obj1, animal_obj1)
                     case 3:
-                        funcionario_obj.ler_arquivo('src\Database\Banco_Datas.csv')
+                        Gerencia_csv.ler_arquivo('src\Database\Banco_Datas.csv')
+
                     case 4:
-                        funcionario_obj.ler_arquivo('src\Database\Banco_Vacinas.csv')
+                        Gerencia_csv.ler_arquivo('src\Database\Banco_Vacinas.csv')
                     case 5:
                         data = str(input("Informe uma data: "))
                         animal = str(input("Informe o nome do aninal: "))
