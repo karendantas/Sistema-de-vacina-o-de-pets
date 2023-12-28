@@ -9,7 +9,9 @@ class Gerencia_csv:
         self.cabecalho_animais = ['Nome', 'Sexo','Data Nascimento','Histórico de Vacinas']
         self.cabecalho_clientes = ['Nome Completo','Data de Nascimento','Telefone','CPF','Login','Senha','Email']
         self.cabecalho_vacinas = ['Nome','Dosagem','Observacoes','Data de Vencimento','Quantidade']
+        self.cabecalho_funcionarios = ['Nome Completo', 'Data de Nascimento', 'Telefone', 'CPF']
         self.cabecalho_datas = ['Data']
+
         #fazer cabeçalhos csv
 
         pass
@@ -42,6 +44,7 @@ class Gerencia_csv:
         re_animais = r'.*\\.*\\.*_Animais.csv'
         re_datas = r'.*\\.*\\.*_Datas.csv'
         re_vacinas = r'.*\\.*\\.*_Vacinas.csv'
+        re_funcionarios = r'.*\\.*\\.*_Funcionarios.csv'
 
         if re.search(re_clientes, caminho):
             return self.cabecalho_clientes
@@ -55,12 +58,15 @@ class Gerencia_csv:
         if re.search(re_vacinas, caminho):
             return self.cabecalho_vacinas
         
+        if re.search(re_funcionarios, caminho):
+            return self.cabecalho_funcionarios
+        
     def escrever_arquivo(self, caminho, dados):
         ''' 
         coleta dados e escreve em um arquivo csv
         
         Args:
-        caminho(str): Referente ao caminho para o arquivo csv
+        caminho(str): Referente ao camainho para o arquivo csv
         dados(list): Lista que contem outras listas de dados
             
         '''
@@ -153,5 +159,21 @@ class Gerencia_csv:
                     return True
                 else:
                     print("Senha ou login incorretos")
+
+    def verificar_datas(self, data):
+        '''
+        Verifica dentro do arquivo 'Banco_Datas' se existe uma data compatível com a que foi
+        requisitada.
+
+        Args:
+        data():
+        '''
+        with open('src\Databse\Banco_Datas.csv', mode='r') as arquivopy:
+            leitor_csv = csv.reader(arquivopy, delimiter=',')
+            next(leitor_csv)
+            for linha in leitor_csv:
+                if linha[0] == data:
+                    return True
+    
 
 

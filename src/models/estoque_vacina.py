@@ -1,11 +1,11 @@
-from src.utilities.gerencia_csv import ler_arquivo, escrever_arquivo
+from src.utilities.gerencia_csv import Gerencia_csv
 
 '''
     Arquivo dedicado as classes que gerenciam datas, estoque de vacinas e agendamentos do sistema
     
 '''
 
-class Agenda:
+class Agenda(Gerencia_csv):
     '''
 
     Classe reponsável por fornecer informações sobre as vacinas e datas de vacinações
@@ -27,9 +27,8 @@ class Agenda:
     def datas_disponiveis(self):
         '''
             Le um arquivo csv que contem string de datas
-
         '''
-        ler_arquivo("Arquivos.csv\Banco_Vacinas.csv")
+        super().ler_arquivo("Arquivos.csv\Banco_Vacinas.csv")
     
     def modificar_datas(self, data):
         '''
@@ -39,7 +38,7 @@ class Agenda:
         Args: data(str) Data no formato dd/mm/aaaa 
         '''
         dados = [[data]]
-        escrever_arquivo("Agendas\Banco_Vacinas", dados)
+        super().escrever_arquivo("Agendas\Banco_Vacinas", dados)
     
     def vacinas_disponiveis(self):
         '''
@@ -47,13 +46,13 @@ class Agenda:
 
         '''
         print("Vacinas disponíveis no momento: ")
-        ler_arquivo("Arquivos.csv\Banco_Vacinas.csv")
+        super().ler_arquivo("Arquivos.csv\Banco_Vacinas.csv")
         
 
 
 class EstoqueVacinas:
     def __init__(self):
-        self.lista_Vacinas = []
+        pass
 
     def mostrar_vacinas(self):
         '''
@@ -61,7 +60,7 @@ class EstoqueVacinas:
         le um arquivo csv contendo as vacinas disponíveis do sistema
 
         '''
-        ler_arquivo("ArquivosCSV\Banco_Vacinas.csv")
+        super().ler_arquivo("ArquivosCSV\Banco_Vacinas.csv")
 
     def adiciona_vacina(self, nomevacina, quantidade):
         '''
@@ -73,7 +72,7 @@ class EstoqueVacinas:
 
         '''
         dados = [[nomevacina, quantidade]]
-        escrever_arquivo("ArquivosCSV\Banco_Vacinas.csv", dados)
+        super().escrever_arquivo("ArquivosCSV\Banco_Vacinas.csv", dados)
     
 
     #terminar esse (to quase, codigo ta la no gerencia_csv)

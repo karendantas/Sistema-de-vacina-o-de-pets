@@ -15,7 +15,8 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
             que sera armazenado na variavel 'animal'
 
             Depois que a variavel conter de certeza um objeto de animal, ele sera adiconado
-            a lista de animais do cliente
+            a lista de animais do cliente e os dados do objeto serao enviados para o arquivo
+            'Banco_Animais'
         
         '''
         animal = Usuario().Cadastrar_pet()

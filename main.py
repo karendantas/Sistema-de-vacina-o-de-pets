@@ -30,9 +30,7 @@ while opcao != 3:
             opcao2 = int(input("Digite sua opção: "))
             match opcao2:
                 case 1:
-                    login = input("Informe o login: ")
-                    senha = input("Informe a senha: ")
-                    if (Usuario.autentica(login,senha) == True):
+                    if (Usuario.autentica() == True):
                         #Caso cliente seja autenticado, cria-se um objeto a partir dos dados armazenados
                         cliente_obj = ''
                         with open ("src/Database/Banco_Cliente.csv", mode ='r') as arq:
