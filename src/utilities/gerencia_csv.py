@@ -60,7 +60,7 @@ class Gerencia_csv:
         coleta dados e escreve em um arquivo csv
         
         Args:
-        caminho(str): Referente ao camainho para o arquivo csv
+        caminho(str): Referente ao caminho para o arquivo csv
         dados(list): Lista que contem outras listas de dados
             
         '''

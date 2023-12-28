@@ -53,7 +53,7 @@ class Agenda:
 
 class EstoqueVacinas:
     def __init__(self):
-        pass
+        self.lista_Vacinas = []
 
     def mostrar_vacinas(self):
         '''

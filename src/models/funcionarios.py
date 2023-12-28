@@ -15,7 +15,6 @@ class Funcionário(Pessoa):
         return self.__salario
     
     
-
     def Agendar_vacina(self, cliente, animal,data,agenda,vacina):
         cliente.Agendar_vacina(data, animal, cliente, agenda, vacina)    
     
