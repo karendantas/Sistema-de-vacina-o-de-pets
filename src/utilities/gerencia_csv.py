@@ -36,8 +36,12 @@ class Gerencia_csv:
     def retorna_cabecalho(self, caminho):
 
         '''
-        Usa regex para capturar palavras chave no caminho, que irá retorna o cabeçalho 
-        de acorod com a palavra chave encontrada.
+        O regex serve para verificar qual caminho do arquivo, e de acordo com o nome 'chave'
+        do final do arquvivo, um cabeçalho especifico dessa chave sera usava para inicializar o 
+        arquivo.
+
+        Args:
+        caminho(str): caminho do arquivo 
         
         '''
         re_clientes = r'.*\\.*\\.*_Cliente.csv'
@@ -120,22 +124,6 @@ class Gerencia_csv:
                  escritor_csv.writerows(linhas_atualiadas)
             
 
-    def limpar_csv(caminho):
-        with open(caminho, mode='w') as arquivopy:
-            escritor_csv = csv.writer(arquivopy, delimiter=',')
-            escritor_csv.writerows=""
-
-    def apagar_conteudo_arquivo_csv(caminho):
-        cabeçalho=[]
-        with open(caminho, mode='r') as arq:
-            leitor = csv.reader(arq, delimiter=',')
-            cabeçalho = next(leitor)
-
-        # Abre o arquivo no modo de escrita, o que apaga o conteúdo existente
-        with open(caminho, 'w', newline='', encoding='utf-8') as arq:
-            escritor = csv.writer(arq, delimiter=',')
-            escritor.writerow(cabeçalho)
-
     #criei uma autenticacao diretamente pelo csv
     def autentica_usuario(self, caminho, login, senha):
         '''
@@ -163,7 +151,7 @@ class Gerencia_csv:
     def autentica_funcionario(self, caminho, login, senha):
         '''
         Método que atua junto com método da classe Cliente, fazendo leitura e conferindo
-        informação das linhas
+        informação das linhas do banco dos funcionarios, uma vez que ele tem mais informações.
 
         Args:
         login(str): Login de um usuario
@@ -183,7 +171,7 @@ class Gerencia_csv:
                 else:
                     print("Senha ou login incorretos")
 
-    def verificar_datas(self,caminho ,data):
+    def verificar_datas(self, data):
         '''
         Verifica dentro do arquivo 'Banco_Datas' se existe uma data compatível com a que foi
         requisitada.
@@ -191,7 +179,7 @@ class Gerencia_csv:
         Args:
         data():
         '''
-        with open(caminho, mode='r') as arquivopy:
+        with open('src\Databse\Banco_Datas.csv', mode='r') as arquivopy:
             leitor_csv = csv.reader(arquivopy, delimiter=',')
             next(leitor_csv)
             for linha in leitor_csv:

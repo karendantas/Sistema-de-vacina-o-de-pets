@@ -41,15 +41,38 @@ class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
 
     @abstractmethod
     def Cadastrar_pet(self):
-        pass
+       pass
     
     @abstractmethod
     def Agendar_vacina(self, data, Animal, Cliente, Agenda, Vacina):
-        pass
+        #lembrando que antes precisa mostrar para o cliente as datas disponiveis
+        
+        '''Esse metodo irá receber os args e irá alocar em um dict. 
+           Esse dict irá ser alocado na classe Agenda por meio do metódo set_agendamentos
+
+            Args:
+            data: uma string no formato datetime
+            animal: (object) uma instancia da classe Animal
+            cliente: (object) uma instancia da classe Cliente
+            agenda: (object) uma instancia da classe Agenda
+            vacina: (object) uma instancia da classe Vacina
+        '''
+   
+        agendamento = {}
+        agendamento = {"Cliente: ": Cliente,"Animal: ":Animal,"Data: ":data,"Vacina: ":Vacina}
+        Agenda.set_agendamentos(agendamento)
+      
     
     @abstractmethod
     def Aplicar_vacina(self,animal,vacina,aplicador,aplicacao_vacina):
-        pass
+        if aplicador is None:
+            print("Não foi possível efetuar a vacinação")
+        else:
+            aplicacao_vacina.data_aplicacao = datetime.today()
+            animal.setHistoricoVacinas("Vacina: {}\nAplicador: {}\nData aplicação Vacina: {}".format(vacina.nome,
+            aplicador.nome_completo,aplicacao_vacina.data_aplicacao))
+            #chamar funcao que remove uma vacina
+            # Gerencia_csv.remove_vacinas(vacina.nome)
 
 class Pessoa:
     def __init__(self, nome_completo, data, telefone, cpf):
