@@ -1,7 +1,6 @@
 from src.models.usuario import Pessoa
 from src.models.usuario import Usuario
 from src.utilities.gerencia_csv import Gerencia_csv
-
 class Funcionario(Pessoa, Usuario, Gerencia_csv):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf, salário, cargo,login,senha,email):
         super().__init__(nome_completo, data_nascimento, telefone, cpf)

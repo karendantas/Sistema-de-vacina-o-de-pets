@@ -52,15 +52,11 @@ while opcao != 3:
                             match opcao3:
                                 case 1:
                                     #os inputs estao dentro do metodo que o objeto chama, e ele retorna o animla
-                                    animal_obj = ''
-                                    animal_obj = Usuario.Cadastrar_pet(Usuario)
+                                    cliente_obj.Cadastrar_pet()
                                 case 2:
                                     data = str(input("Informe uma data: "))
                                     animal = str(input("Informe o nome do aninal: "))
                                     vacina = str(input("Informe o nome da vacina: "))
-                                    formato = "%d/%m/%Y"
-                                    data = datetime.strptime(data, formato)
-                                    data = data.date()
                                     for i in cliente_obj.animais:
                                        if (i.nome == animal):
                                            animal = i
@@ -98,7 +94,7 @@ while opcao != 3:
             if (verificacao == True):
                 #Caso funcionario seja autenticado, cria-se um objeto a partir dos dados armazenados
                 funcionario_obj = ''
-                with open ("src/Database/Banco_Funcionarios.csv", mode ='r') as arq:
+                with open ("src\Database\Banco_Funcionarios.csv", mode ='r') as arq:
                         leitor_csv = csv.reader(arq, delimiter =',')
                         next(leitor_csv)
                         for atributo in leitor_csv:
@@ -148,7 +144,6 @@ while opcao != 3:
                         animal_obj = Usuario.Cadastrar_pet(Usuario)
                     case 3:
                         Gerencia_csv.ler_arquivo('src\Database\Banco_Datas.csv')
-
                     case 4:
                         Gerencia_csv.ler_arquivo('src\Database\Banco_Vacinas.csv')
                     case 5:
