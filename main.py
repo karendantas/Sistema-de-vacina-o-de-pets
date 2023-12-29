@@ -90,7 +90,7 @@ while opcao != 3:
             #autenticando funcionario
             login = input("Informe o login: ")
             senha = input("Informe a senha: ")
-            verificacao = Funcionario.autentica_funcionario(Funcionario,"src\Database\Banco_Funcionarios.csv",login,senha)
+            verificacao = Funcionario.autentica_funcionario(Funcionario,"src\Database\Banco_Funcionarios.csv",login, senha)
             if (verificacao == True):
                 #Caso funcionario seja autenticado, cria-se um objeto a partir dos dados armazenados
                 funcionario_obj = ''
@@ -98,7 +98,7 @@ while opcao != 3:
                         leitor_csv = csv.reader(arq, delimiter =',')
                         next(leitor_csv)
                         for atributo in leitor_csv:
-                            if atributo[6] == login:
+                            if atributo[7] == login:
                                 funcionario_obj = Funcionario(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6], atributo[7], atributo[8])
 
             print("1- Cadastrar um novo cliente")
