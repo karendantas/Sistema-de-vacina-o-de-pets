@@ -52,15 +52,11 @@ while opcao != 3:
                             match opcao3:
                                 case 1:
                                     #os inputs estao dentro do metodo que o objeto chama, e ele retorna o animla
-                                    animal_obj = ''
-                                    animal_obj = Usuario.Cadastrar_pet(Usuario)
+                                    cliente_obj.Cadastrar_pet()
                                 case 2:
                                     data = str(input("Informe uma data: "))
                                     animal = str(input("Informe o nome do aninal: "))
                                     vacina = str(input("Informe o nome da vacina: "))
-                                    formato = "%d/%m/%Y"
-                                    data = datetime.strptime(data, formato)
-                                    data = data.date()
                                     for i in cliente_obj.animais:
                                        if (i.nome == animal):
                                            animal = i
@@ -98,7 +94,7 @@ while opcao != 3:
             if (verificacao == True):
                 #Caso funcionario seja autenticado, cria-se um objeto a partir dos dados armazenados
                 funcionario_obj = ''
-                with open ("src/Database/Banco_Funcionarios.csv", mode ='r') as arq:
+                with open ("src\Database\Banco_Funcionarios.csv", mode ='r') as arq:
                         leitor_csv = csv.reader(arq, delimiter =',')
                         next(leitor_csv)
                         for atributo in leitor_csv:
@@ -134,14 +130,6 @@ while opcao != 3:
                         cliente_obj1 = Cliente(nome_cli, data, telefone,cpf, login, senha, email)
                         funcionario_obj.escrever_arquivo('src/Database/Banco_Cliente.csv', dados_cliente)
                     case 2:
-                        nome_pet = input("Informe o nome do animal: ")
-                        data_pet = str(input("Informe a data de nascimento do animal:"))
-                        formato = "%d/%m/%Y"
-                        data_pet = datetime.strptime(data_pet, formato)
-                        data_pet = data_pet.date()
-                        raça_pet = input("Informe a raça do animal: ")
-                        sexo_pet = input("Informe o sexo do animal: ")
-                        especie_pet = input("Informe a especie do animal:")
                         nome_cli = input("Informe o nome do cliente: ")
 
                         cliente_obj1 = ''
@@ -152,12 +140,12 @@ while opcao != 3:
                                     if atributo[0] == nome_cli:
                                         cliente_obj1 = Cliente(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6])
 
-                        animal_obj1 = Animal(nome_pet, raça_pet, especie_pet, data_pet, sexo_pet)
-                        funcionario_obj.Cadastrar_pet(cliente_obj1, animal_obj1)
+                        animal_obj = ''
+                        animal_obj = Usuario.Cadastrar_pet(Usuario)
                     case 3:
-                        funcionario_obj.ler_arquivo('src\Database\Banco_Datas.csv')
+                        Gerencia_csv.ler_arquivo('src\Database\Banco_Datas.csv')
                     case 4:
-                        funcionario_obj.ler_arquivo('src\Database\Banco_Vacinas.csv')
+                        Gerencia_csv.ler_arquivo('src\Database\Banco_Vacinas.csv')
                     case 5:
                         data = str(input("Informe uma data: "))
                         animal = str(input("Informe o nome do aninal: "))

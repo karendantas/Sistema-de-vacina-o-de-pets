@@ -2,7 +2,7 @@ from src.models.usuario import Pessoa
 from src.models.cliente import Cliente
 from src.models.usuario import Usuario
 from src.utilities.gerencia_csv import Gerencia_csv
-class Funcionario(Pessoa):
+class Funcionario(Pessoa,Usuario,Gerencia_csv):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf, salário, cargo,login,senha,email):
         super().__init__(nome_completo, data_nascimento, telefone, cpf)
         Usuario.__init__(self,login, senha, email)
@@ -21,9 +21,9 @@ class Funcionario(Pessoa):
         cliente.Agendar_vacina(data, animal, cliente, agenda, vacina)    
     
     
-    def Cadastrar_pet(self, cliente, animal):
+    def Cadastrar_pet(self, cliente):
         if isinstance(cliente,Cliente):
-            cliente.Cadastrar_pet(animal)
+            cliente.Cadastrar_pet()
 
     def Aplicar_vacina(self):
         pass
