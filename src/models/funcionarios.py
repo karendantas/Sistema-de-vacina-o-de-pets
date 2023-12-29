@@ -1,7 +1,7 @@
 from src.models.usuario import Pessoa
-from src.models.cliente import Cliente
 from src.models.usuario import Usuario
 from src.utilities.gerencia_csv import Gerencia_csv
+
 class Funcionario(Pessoa, Usuario, Gerencia_csv):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf, salário, cargo,login,senha,email):
         super().__init__(nome_completo, data_nascimento, telefone, cpf)
@@ -18,12 +18,11 @@ class Funcionario(Pessoa, Usuario, Gerencia_csv):
     
     
     def Agendar_vacina(self, cliente, animal,data,agenda,vacina):
-        cliente.Agendar_vacina(data, animal, cliente, agenda, vacina)    
+        pass 
     
     
     def Cadastrar_pet(self, cliente):
-        if isinstance(cliente,Cliente):
-            cliente.Cadastrar_pet()
+       pass
 
     def Aplicar_vacina(self):
         pass

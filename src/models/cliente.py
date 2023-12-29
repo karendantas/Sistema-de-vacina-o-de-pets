@@ -1,6 +1,7 @@
 from src.models.usuario import Pessoa, Usuario
 from src.models.animal import Animal
 from src.utilities.gerencia_csv import Gerencia_csv
+import datetime
 
 class Cliente(Pessoa, Usuario, Gerencia_csv):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf, login, senha, email):
@@ -19,11 +20,23 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
             'Banco_Animais'
         
         '''
-        animal = Usuario().Cadastrar_pet()
-        if isinstance(animal, Animal):
-            self.animais.append(animal)
-            dados = [self.animais]
-            Gerencia_csv.escrever_arquivo('src\Database\Banco_Animais.csv', dados)
+        nome_pet = input("Informe o nome do animal: ")
+        data_pet = str(input("Informe a data de nascimento do animal:"))
+        formato = "%d/%m/%Y"
+        data_pet = datetime.strptime(data_pet, formato)
+        data_pet = data_pet.date()
+        raça_pet = input("Informe a reaça do animal: ")
+        sexo_pet = input("Informe o sexo do animal: ")
+        especie_pet = input("Informe a especie do animal:")
+
+        animal = Animal(nome_pet, raça_pet, especie_pet, data_pet,sexo_pet )
+
+        dados = [[nome_pet, raça_pet, data_pet, especie_pet, data_pet, sexo_pet]]
+        Gerencia_csv().escrever_arquivo("src\Database\Banco_Animais.csv", dados)
+
+        self.animais.append(animal)
+        dados = [self.animais]
+        Gerencia_csv.escrever_arquivo('src\Database\Banco_Animais.csv', dados)
 
             
     def Agendar_vacina(self, data, animal, cliente, Agenda, vacina):

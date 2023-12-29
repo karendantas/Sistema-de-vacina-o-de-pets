@@ -132,7 +132,7 @@ while opcao != 3:
 
                         dados_cliente = [[nome_cli, data, telefone,cpf, login, senha, email]]
                         cliente_obj1 = Cliente(nome_cli, data, telefone,cpf, login, senha, email)
-                        funcionario_obj.escrever_arquivo('src/Database/Banco_Cliente.csv', dados_cliente)
+                        Gerencia_csv.escrever_arquivo(Gerencia_csv,'src/Database/Banco_Cliente.csv', dados_cliente)
                     case 2:
                         nome_cli = input("Informe o nome do cliente: ")
 

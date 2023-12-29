@@ -2,10 +2,10 @@ from src.utilities.gerencia_csv import Gerencia_csv
 
 
 class Animal(Gerencia_csv):
-    def __init__(self, nome, raça, especie, data, sexo):
+    def __init__(self, nome, raca, especie, data, sexo):
         self.nome = nome
-        self.raça = Raça(raça)
-        self.especie = especie
+        self.raça = Raca(raca)
+        self.especie = Especie(especie)
         self.data_nascimento =  data
         self.sexo = sexo
         self.__historico_vacinas = []
@@ -18,7 +18,7 @@ class Animal(Gerencia_csv):
         return self.__historico_vacinas
     
 
-class Raça:
+class Raca:
     def __init__(self, nome_raça):
         self.nome_raça = nome_raça
 class Especie:
