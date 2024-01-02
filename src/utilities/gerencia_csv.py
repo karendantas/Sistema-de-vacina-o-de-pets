@@ -139,6 +139,7 @@ class Gerencia_csv:
         
         '''
         with open (caminho, mode='r') as arquivopy:
+            Autenticacao = False
             leitor_csv = csv.reader(arquivopy, delimiter=',')
             next(leitor_csv)
             for linha in leitor_csv:
@@ -146,7 +147,10 @@ class Gerencia_csv:
                     print("Autenticado!")
                     return True
                 else:
-                    print("Senha ou login incorretos")
+                    Autenticacao = False
+            if Autenticacao == False:
+                print("Login ou senha incorretos")
+                    
 
     def autentica_funcionario(self, caminho, login, senha):
         '''
@@ -162,6 +166,7 @@ class Gerencia_csv:
         
         '''
         with open (caminho, mode='r') as arquivopy:
+            Autenticacao = False
             leitor_csv = csv.reader(arquivopy, delimiter=',')
             next(leitor_csv)
             for linha in leitor_csv:
@@ -169,7 +174,9 @@ class Gerencia_csv:
                     print("Autenticado!")
                     return True
                 else:
-                    print("Senha ou login incorretos")
+                    Autenticacao = False
+            if Autenticacao == False:
+                print("Login ou senha incorretos")
 
     def verificar_datas(self, data):
         '''

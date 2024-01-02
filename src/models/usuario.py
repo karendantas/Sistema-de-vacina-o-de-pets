@@ -46,7 +46,7 @@ class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
     @abstractmethod
     def Agendar_vacina(self, data, Animal, Cliente, Agenda, Vacina):
         #lembrando que antes precisa mostrar para o cliente as datas disponiveis
-        
+        pass
         '''Esse metodo irá receber os args e irá alocar em um dict. 
            Esse dict irá ser alocado na classe Agenda por meio do metódo set_agendamentos
 
@@ -58,9 +58,9 @@ class Usuario(ABC, AutenticavelMixIn, Gerencia_csv):
             vacina: (object) uma instancia da classe Vacina
         '''
    
-        agendamento = {}
-        agendamento = {"Cliente: ": Cliente,"Animal: ":Animal,"Data: ":data,"Vacina: ":Vacina}
-        Agenda.set_agendamentos(agendamento)
+        # agendamento = {}
+        # agendamento = {"Cliente: ": Cliente,"Animal: ":Animal,"Data: ":data,"Vacina: ":Vacina}
+        # Agenda.set_agendamentos(agendamento)
       
     
     @abstractmethod

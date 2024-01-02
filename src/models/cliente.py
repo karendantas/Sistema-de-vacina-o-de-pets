@@ -1,7 +1,7 @@
 from src.models.usuario import Pessoa, Usuario
 from src.models.animal import Animal
 from src.utilities.gerencia_csv import Gerencia_csv
-import datetime
+from datetime import datetime
 
 class Cliente(Pessoa, Usuario, Gerencia_csv):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf, login, senha, email):
@@ -32,14 +32,14 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         animal = Animal(nome_pet, raça_pet, especie_pet, data_pet,sexo_pet )
         self.animais.append(animal)
 
-        dados = [[nome_pet, raça_pet, data_pet, especie_pet, data_pet, sexo_pet]]
+        dados = [[nome_pet, raça_pet, especie_pet, data_pet, sexo_pet]]
         Gerencia_csv().escrever_arquivo("src\Database\Banco_Animais.csv", dados)
 
             
-    def Agendar_vacina(self, data, animal, cliente, Agenda, vacina):
+    def Agendar_vacina(self, data, Animal, Cliente, Agenda, Vacina):
         '''
         Chama o método 'Agendar_vacina' da classe Pai que reliza a criação de um dicionário
-        e aloca dentro do atributo lista 'agendamentos' da Agenda que está em 'estoque_funcionarios'.
+        e aloca dentro do atributo lista 'agendamentos' da Agenda que está em 'estoque_vacina'.
 
         Args:
         data: 
@@ -51,7 +51,9 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         '''
 
         if Gerencia_csv.verificar_datas(Gerencia_csv,data):
-            Usuario().Agendar_vacina(data, animal, cliente, Agenda, vacina)
+            agendamento = {}
+            agendamento = {"Cliente: ": Cliente,"Animal: ": Animal,"Data: ": data,"Vacina: ": Vacina}
+            Agenda.set_agendamentos(agendamento)
         else:
             print("Data informada inválida")
     

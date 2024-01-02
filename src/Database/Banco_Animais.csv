@@ -1,7 +1,3 @@
-Nome, Raça, Datanilu,jdfjjdf,2023-03-21,dsfd,2023-03-21,sfdgf
-<<<<<<< HEAD
-pino,asdsds,2023-02-12,sdsfd,2023-02-12,femea
-Sky,Pastor Alem�o,1999-08-18,Cachorro,1999-08-18,Macho
-=======
-House,Chiaua,2002-02-20,Cachorro,2002-02-20,Macho
->>>>>>> 1b5f2e4b5ab69f61eae0b5ab3eb578128ef20719
+Nome, Raça, Especie,Data de Nascimento,Sexo
+House,Chiaua,Cachorro,2002-02-20,Macho
+SkyHouse,Golden Retriever,Cachorro,2023-12-28,Macho

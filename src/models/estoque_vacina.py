@@ -28,7 +28,8 @@ class Agenda(Gerencia_csv):
         '''
             Le um arquivo csv que contem string de datas
         '''
-        super().ler_arquivo("Arquivos.csv\Banco_Vacinas.csv")
+        Gerencia_csv.ler_arquivo('src\Database\Banco_Datas.csv')
+        # super().ler_arquivo("Arquivos.csv\Banco_Vacinas.csv")
     
     def modificar_datas(self, data):
         '''
