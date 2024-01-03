@@ -38,16 +38,15 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
             
     def Agendar_vacina(self, data, Animal, Cliente, Agenda, Vacina):
         '''
-        Chama o método 'Agendar_vacina' da classe Pai que reliza a criação de um dicionário
-        e aloca dentro do atributo lista 'agendamentos' da Agenda que está em 'estoque_vacina'.
+           Esse metodo irá receber os args e irá alocar em um dict. 
+           Esse dict irá ser alocado na classe Agenda por meio do metódo set_agendamentos
 
-        Args:
-        data: 
-        animal: (Object) Uma instancia de Animal
-        cliente: (Object) Instancia de Cliente
-        Agenda: (Object) Instancia de Agenda
-        vacina: (Object) Uma instancia da Vacina a ser utilizada
-
+            Args:
+            data: uma string no formato datetime
+            animal: (object) uma instancia da classe Animal
+            cliente: (object) uma instancia da classe Cliente
+            agenda: (object) uma instancia da classe Agenda
+            vacina: (object) uma instancia da classe Vacina
         '''
 
         if Gerencia_csv.verificar_datas(Gerencia_csv,data):
@@ -59,6 +58,7 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
     
     def Aplicar_vacina(self,vacina, animal,aplicador,aplicacao_vacina):
         '''
+        
         Simula a hora que o cliente leva o animal para receber a vacina, adicionando ao 
         histórico do animal a vacina recebida.
 
@@ -67,6 +67,17 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         animal: (Object) Uma instancia de Animal
         aplicador: (Object) Uma instancia de Aplicador
         aplicacao_vacina: (Object) Uma instancia de Aplicacao_Vacina
-        '''
         
-        Usuario().Aplicar_vacina(animal,vacina,aplicador,aplicacao_vacina)
+        '''
+
+        if aplicador is None:
+            print("Não foi possível efetuar a vacinação")
+        else:
+            aplicacao_vacina.data_aplicacao = datetime.today()
+            animal.setHistoricoVacinas("Vacina: {}\nAplicador: {}\nData aplicação Vacina: {}".format(vacina.nome,
+            aplicador.nome_completo,aplicacao_vacina.data_aplicacao))
+
+
+    def Visualizar_pets(self):
+        for i in self.animais:
+            print("Nome: {}\nEspécie: {}\nRaça: {}\nData de Nascimento: {}".format(i.nome,i.especie,i.raca,i.data_nascimento))

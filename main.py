@@ -12,7 +12,7 @@ import csv
 #Objetos definidos
 agenda_sistema = Agenda()
 aplicador_obj = Aplicador("Fernanda Biquinho", "12/02/1833", "21 32333212", "132.132.333-22", "Doutura")
-
+aplicacao_vacina_obj = AplicacaoVacina(0,"")
 
 
 
@@ -48,11 +48,12 @@ while opcao != 3:
                                         cliente_obj = Cliente(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6])
                         opcao3 = 0
                         
-                        while opcao3 != 4:
+                        while opcao3 != 5:
                             print("1 - Cadastrar Pet")
                             print("2 - Agendar Vacina")
                             print("3 - Aplicar Vacina")
-                            print("4 - Sair")
+                            print("4 - Verificar Pets")
+                            print("5 - Sair")
                             opcao3 = int(input("Digite sua opção: "))
                             match opcao3:
                                 case 1:
@@ -75,23 +76,28 @@ while opcao != 3:
                                 case 3:
                                     
                                     cliente_obj.Aplicar_vacina()
-                                
+
                                 case 4:
+
+                                    cliente_obj.Visualizar_pets()
+
+                                case 5:
                                     break
                     else:
                         print("Não foi possivel encontrar seu cadastro")
 
                 case 2:
-                    nome = input("Informe seu nome:")
+
+                    nome = input("Informe seu nome: ")
                     data = str(input("Informe uma data: "))
                     formato = "%d/%m/%Y"
                     data = datetime.strptime(data, formato)
                     data = data.date()
-                    telefone = str(input("Informe seu telefone:"))
-                    cpf = str(input("Informe seu cpf"))
+                    telefone = str(input("Informe seu telefone: "))
+                    cpf = str(input("Informe seu cpf: "))
                     login = str(input("Crie um login: "))
-                    senha = str(input("Crie uma senha:"))
-                    email =str(input("Informe seu email:"))
+                    senha = str(input("Crie uma senha: "))
+                    email =str(input("Informe seu email: "))
 
                     cliente_objeto = Cliente(nome, data, telefone, cpf, login, senha, email)
                     dados = [[nome, data, telefone, cpf, login, senha, email]]
@@ -99,6 +105,7 @@ while opcao != 3:
 
                     
         case 2:
+
             print("TELA DO FUNCIONÁRIO")
             #autenticando funcionario
             login = input("Informe o login: ")
@@ -192,7 +199,9 @@ while opcao != 3:
 
                     case 6:
                         
-                        funcionario_obj.Aplicar_vacina(vacina, animal, aplicador_obj)
+
+
+                        cliente_obj1.Aplicar_vacina(vacina_obj,animal_obj,aplicador_obj,aplicacao_vacina_obj)
                     
                     case 7:
                         break

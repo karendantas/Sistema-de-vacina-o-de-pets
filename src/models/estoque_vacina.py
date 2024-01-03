@@ -49,8 +49,7 @@ class Agenda(Gerencia_csv):
         print("Vacinas disponíveis no momento: ")
         super().ler_arquivo("Arquivos.csv\Banco_Vacinas.csv")
         
-
-
+    
 class EstoqueVacinas:
     def __init__(self):
         pass
