@@ -6,7 +6,7 @@ import re
 
 class Gerencia_csv:
     def __init__(self):
-        self.cabecalho_animais = ['Nome', 'Sexo','Data Nascimento','Histórico de Vacinas']
+        self.cabecalho_animais = ['Nome', 'Sexo','Data Nascimento','Histórico de Vacinas','Nome Cliente']
         self.cabecalho_clientes = ['Nome Completo','Data de Nascimento','Telefone','CPF','Login','Senha','Email']
         self.cabecalho_vacinas = ['Nome','Dosagem','Observacoes','Data de Vencimento','Quantidade']
         self.cabecalho_funcionarios = ['Nome Completo', 'Data de Nascimento', 'Telefone', 'CPF','Salario', 'Cargo','Login','Senha','Email']

@@ -75,8 +75,8 @@ while opcao != 3:
                                 
                                 case 3:
                                     
-                                    cliente_obj.Aplicar_vacina()
-
+                                    # cliente_obj.Aplicar_vacina()
+                                    pass
                                 case 4:
 
                                     cliente_obj.Visualizar_pets()
@@ -118,7 +118,7 @@ while opcao != 3:
                         leitor_csv = csv.reader(arq, delimiter =',')
                         next(leitor_csv)
                         for atributo in leitor_csv:
-                            if atributo[7] == login:
+                            if atributo[6] == login:
                                 funcionario_obj = Funcionario(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6], atributo[7], atributo[8])
     
             print("1- Cadastrar um novo cliente")
@@ -189,19 +189,21 @@ while opcao != 3:
                                 for atributo in leitor_csv:
                                     if atributo[0] == nome_cli:
                                         cliente_obj1 = Cliente(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6])
-                        
-                            for i in cliente_obj1.animais:
-                                if (i.nome == animal):
-                                    animal = i
-                            funcionario_obj.Agendar_vacina(data, animal, cliente_obj1, agenda_sistema, vacina_obj.nome)
                         except:
                             print("Não foi possivel achar o cliente")
-
+                        try:
+                            for i in cliente_obj1.animais:
+                                if (i.nome == animal):
+                                    print(i.nome)
+                                    # animal = Animal(i.nome,i.raça.nome_raça,i.especie.nome_especie,i.data_nascimento,i.sexo)
+                            # cliente_obj1.Agendar_vacina(data, animal, cliente_obj1, agenda_sistema, vacina_obj.nome)
+                        except:
+                            print("Não foi possivel achar o animal")
                     case 6:
-                        
-
-
-                        cliente_obj1.Aplicar_vacina(vacina_obj,animal_obj,aplicador_obj,aplicacao_vacina_obj)
+                        nome_cli = input("Digite o nome do cliente: ")
+                        nome_pet = input("Digite o nome do animal: ")
+                        agenda_sistema.verificar_agendamentos(nome_cli,nome_pet)
+                        # cliente_obj1.Aplicar_vacina(vacina_obj,animal_obj,aplicador_obj,aplicacao_vacina_obj)
                     
                     case 7:
                         break

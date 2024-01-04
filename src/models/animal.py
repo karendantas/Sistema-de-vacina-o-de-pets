@@ -9,6 +9,7 @@ class Animal(Gerencia_csv):
         self.data_nascimento =  data
         self.sexo = sexo
         self.__historico_vacinas = []
+        self.nome_cliente = ""
 
     #Gets e Sets
     def getHitoricoVacinas(self):

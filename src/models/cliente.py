@@ -2,7 +2,7 @@ from src.models.usuario import Pessoa, Usuario
 from src.models.animal import Animal
 from src.utilities.gerencia_csv import Gerencia_csv
 from datetime import datetime
-
+import csv
 class Cliente(Pessoa, Usuario, Gerencia_csv):
     def __init__(self, nome_completo, data_nascimento, telefone, cpf, login, senha, email):
         Pessoa.__init__(self, nome_completo, data_nascimento, telefone, cpf)
@@ -30,9 +30,10 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
         especie_pet = input("Informe a especie do animal:")
 
         animal = Animal(nome_pet, raça_pet, especie_pet, data_pet,sexo_pet )
-        self.animais.append(animal)
+        animal.nome_cliente = self.nome_completo
+        # self.animais.append(animal)
 
-        dados = [[nome_pet, raça_pet, especie_pet, data_pet, sexo_pet]]
+        dados = [[nome_pet, raça_pet, especie_pet, data_pet, sexo_pet,animal.nome_cliente]]
         Gerencia_csv().escrever_arquivo("src\Database\Banco_Animais.csv", dados)
 
             
@@ -51,12 +52,12 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
 
         if Gerencia_csv.verificar_datas(Gerencia_csv,data):
             agendamento = {}
-            agendamento = {"Cliente: ": Cliente,"Animal: ": Animal,"Data: ": data,"Vacina: ": Vacina}
+            agendamento = {"Cliente": Cliente,"Animal": Animal,"Data": data,"Vacina": Vacina}
             Agenda.set_agendamentos(agendamento)
         else:
             print("Data informada inválida")
     
-    def Aplicar_vacina(self,vacina, animal,aplicador,aplicacao_vacina):
+    def Aplicar_vacina(self, vacina, animal,aplicador,aplicacao_vacina):
         '''
         
         Simula a hora que o cliente leva o animal para receber a vacina, adicionando ao 
@@ -79,5 +80,30 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
 
 
     def Visualizar_pets(self):
+        '''
+            Nesse metodo é feita uma consulta ao banco de animais, nessa consulta é verificado se o animal possui o nome_completo do cliente
+            atrelado a ele, caso tenha o animal então vai ser adicionado a lista self.animais.
+        '''
+
+        animal_obj = ''
+        with open ("src/Database/Banco_Animais.csv", mode ='r') as arq:
+            leitor_csv = csv.reader(arq, delimiter =',')
+            next(leitor_csv)
+            for atributo in leitor_csv:
+                if atributo[5] == self.nome_completo:
+                    animal_obj = Animal(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4])
+                    # Aqui verifica se a lista está vazia
+                    if len(self.animais) == 0:
+                        # Adiciona o primeiro Animal
+                        self.animais.append(animal_obj)
+                    else:
+                        cont = 0
+                        for i in self.animais:
+                            # Aqui é percorrido toda a lista para ver se existe algum animal com aquele nome atrelado a lista, caso haja
+                            # esse animal não é adicionado
+                            if (i.nome == animal_obj.nome):
+                                cont+=1
+                        if (cont == 0):
+                            self.animais.append(animal_obj)
         for i in self.animais:
-            print("Nome: {}\nEspécie: {}\nRaça: {}\nData de Nascimento: {}".format(i.nome,i.especie,i.raca,i.data_nascimento))
+            print("Nome: {}\nEspécie: {}\nRaça: {}\nData de Nascimento: {}".format(i.nome,i.especie.nome_especie,i.raça.nome_raça,i.data_nascimento))

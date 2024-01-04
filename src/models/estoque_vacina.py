@@ -1,5 +1,5 @@
 from src.utilities.gerencia_csv import Gerencia_csv
-
+from src.models.animal import Animal
 '''
     Arquivo dedicado as classes que gerenciam datas, estoque de vacinas e agendamentos do sistema
     
@@ -48,7 +48,13 @@ class Agenda(Gerencia_csv):
         '''
         print("Vacinas disponíveis no momento: ")
         super().ler_arquivo("Arquivos.csv\Banco_Vacinas.csv")
-        
+    
+    def verificar_agendamentos(self, nome_cliente, nome_animal):
+        for i in self.__agendamentos:
+            if (i["Cliente"].nome == nome_cliente):
+                if(i["Animal".nome == nome_animal]):
+                    animal = Animal(i["Animal"].nome,i["Animal"].raça,i["Animal"].especie,i["Animal"].data_nascimento,i["Animal"].sexo)
+                    print(animal)        
     
 class EstoqueVacinas:
     def __init__(self):
