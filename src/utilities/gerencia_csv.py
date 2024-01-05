@@ -178,7 +178,7 @@ class Gerencia_csv:
             if Autenticacao == False:
                 print("Login ou senha incorretos")
 
-    def verificar_datas(self, data):
+    def verificar_datas(self, caminho, data):
         '''
         Verifica dentro do arquivo 'Banco_Datas' se existe uma data compatível com a que foi
         requisitada.
@@ -186,7 +186,7 @@ class Gerencia_csv:
         Args:
         data():
         '''
-        with open('src\Databse\Banco_Datas.csv', mode='r') as arquivopy:
+        with open(caminho, mode='r') as arquivopy:
             leitor_csv = csv.reader(arquivopy, delimiter=',')
             next(leitor_csv)
             for linha in leitor_csv:

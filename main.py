@@ -62,21 +62,44 @@ while opcao != 3:
                                 
                                 case 2:
                                     
+                                    Gerencia_csv.ler_arquivo('src\Database\Banco_Datas.csv')
+                                    
                                     data = str(input("Informe uma data: "))
-                                    formato = "%d/%m/%Y"
-                                    data = datetime.strptime(data, formato)
-                                    data = data.date()
-                                    animal = str(input("Informe o nome do aninal: "))
                                     vacina = str(input("Informe o nome da vacina: "))
-                                    for i in cliente_obj.animais:
-                                       if (i.nome == animal):
-                                           animal = i
-                                    cliente_obj.Agendar_vacina(data,animal,cliente_obj,agenda_sistema,vacina)
+
+                                    vacina_obj = ''
+                                    try:
+                                        with open ("src\Database\Banco_Vacinas.csv", mode ='r') as arq:
+                                            leitor_csv = csv.reader(arq, delimiter =',')
+                                            next(leitor_csv)
+                                            for atributo in leitor_csv:
+                                                if atributo[0] == vacina:
+                                                    vacina_obj = Vacina(atributo[0],atributo[1],atributo[2],atributo[3])
+                                    except:
+                                        print("Não existe uma vacina com esse nome")
+                                        break
+                        
+                        
+                                    animal = str(input("Informe o nome do animal: "))
+                        
+                                    try:
+                                        with open ("src\Database\Banco_Animais.csv", mode ='r') as arq:
+                                            leitor_csv = csv.reader(arq, delimiter =',')
+                                            next(leitor_csv)
+                                            for atributo in leitor_csv:
+                                                if atributo[0] == animal:
+                                                    if atributo[5] == cliente_obj.nome_completo:
+                                                        animal_obj = Animal(atributo[0],atributo[1],atributo[3],atributo[4],atributo[5])
+                                    except:
+                                        print("Não foi possivel achar o animal")
+                                    cliente_obj.Agendar_vacina(data, animal_obj, cliente_obj, agenda_sistema, vacina_obj.nome)
                                 
                                 case 3:
                                     
-                                    # cliente_obj.Aplicar_vacina()
-                                    pass
+                                    nome_pet = input("Digite o nome do animal: ")
+                                    animal_obj,cliente_obj = agenda_sistema.verificar_agendamentos(cliente_obj.nome_completo,nome_pet)
+                                    cliente_obj.Aplicar_vacina(vacina_obj,animal_obj,aplicador_obj,aplicacao_vacina_obj)
+                                
                                 case 4:
 
                                     cliente_obj.Visualizar_pets()
@@ -169,19 +192,23 @@ while opcao != 3:
                         Gerencia_csv.ler_arquivo('src\Database\Banco_Datas.csv')
                         
                         data = str(input("Informe uma data: "))
-                        animal = str(input("Informe o nome do aninal: "))
-                        vacina = str(input("Informe o nome da vacina: "))
-                        with open ("src\Database\Banco_Funcionarios.csv", mode ='r') as arq:
-                            leitor_csv = csv.reader(arq, delimiter =',')
-                            next(leitor_csv)
-                            for atributo in leitor_csv:
-                                if atributo[0] == vacina:
-                                    vacina_obj = Vacina(atributo[0])
-                        formato = "%d/%m/%Y"
-                        data = datetime.strptime(data, formato)
-                        data = data.date()
+                        vacina = input("Informe o nome da vacina: ")
+                        
+                        vacina_obj = ''
+                        try:
+                            with open ("src\Database\Banco_Vacinas.csv", mode ='r') as arq:
+                                leitor_csv = csv.reader(arq, delimiter =',')
+                                next(leitor_csv)
+                                for atributo in leitor_csv:
+                                    if atributo[0] == vacina:
+                                        vacina_obj = Vacina(atributo[0],atributo[1],atributo[2],atributo[3])
+                        except:
+                            print("Não existe uma vacina com esse nome")
+                            break
                         nome_cli = input("Digite o nome do cliente: ")
+                        
                         cliente_obj1 = ''
+                        
                         try:
                             with open ("src/Database/Banco_Cliente.csv", mode ='r') as arq:
                                 leitor_csv = csv.reader(arq, delimiter =',')
@@ -191,19 +218,25 @@ while opcao != 3:
                                         cliente_obj1 = Cliente(atributo[0], atributo[1], atributo[2], atributo[3], atributo[4], atributo[5], atributo[6])
                         except:
                             print("Não foi possivel achar o cliente")
+                        
+                        animal = str(input("Informe o nome do animal: "))
+                        
                         try:
-                            for i in cliente_obj1.animais:
-                                if (i.nome == animal):
-                                    print(i.nome)
-                                    # animal = Animal(i.nome,i.raça.nome_raça,i.especie.nome_especie,i.data_nascimento,i.sexo)
-                            # cliente_obj1.Agendar_vacina(data, animal, cliente_obj1, agenda_sistema, vacina_obj.nome)
+                            with open ("src\Database\Banco_Animais.csv", mode ='r') as arq:
+                                leitor_csv = csv.reader(arq, delimiter =',')
+                                next(leitor_csv)
+                                for atributo in leitor_csv:
+                                    if atributo[0] == animal:
+                                        if atributo[5] == cliente_obj1.nome_completo:
+                                            animal_obj = Animal(atributo[0],atributo[1],atributo[3],atributo[4],atributo[5])
                         except:
                             print("Não foi possivel achar o animal")
+                        cliente_obj1.Agendar_vacina(data, animal_obj, cliente_obj1, agenda_sistema, vacina_obj.nome)
                     case 6:
                         nome_cli = input("Digite o nome do cliente: ")
                         nome_pet = input("Digite o nome do animal: ")
-                        agenda_sistema.verificar_agendamentos(nome_cli,nome_pet)
-                        # cliente_obj1.Aplicar_vacina(vacina_obj,animal_obj,aplicador_obj,aplicacao_vacina_obj)
+                        animal_obj,cliente_obj = agenda_sistema.verificar_agendamentos(nome_cli,nome_pet)
+                        cliente_obj.Aplicar_vacina(vacina_obj,animal_obj,aplicador_obj,aplicacao_vacina_obj)
                     
                     case 7:
                         break

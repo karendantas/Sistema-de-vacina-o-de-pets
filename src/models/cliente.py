@@ -50,7 +50,7 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
             vacina: (object) uma instancia da classe Vacina
         '''
 
-        if Gerencia_csv.verificar_datas(Gerencia_csv,data):
+        if Gerencia_csv.verificar_datas(Gerencia_csv,'src\Database\Banco_Datas.csv',data):
             agendamento = {}
             agendamento = {"Cliente": Cliente,"Animal": Animal,"Data": data,"Vacina": Vacina}
             Agenda.set_agendamentos(agendamento)
@@ -77,6 +77,7 @@ class Cliente(Pessoa, Usuario, Gerencia_csv):
             aplicacao_vacina.data_aplicacao = datetime.today()
             animal.setHistoricoVacinas("Vacina: {}\nAplicador: {}\nData aplicação Vacina: {}".format(vacina.nome,
             aplicador.nome_completo,aplicacao_vacina.data_aplicacao))
+            print("Vacina Aplicada com sucesso")
 
 
     def Visualizar_pets(self):
